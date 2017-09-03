@@ -212,7 +212,6 @@ void glRenderer::generateShaders()
 
 void glRenderer::resetPositionSSBO()
 {
-
 	// Reset to mouse cursor pos
 	double cursorX, cursorY;
 	int windowWidth, windowHeight;
@@ -380,7 +379,11 @@ void glRenderer::renderScene()
 
 	glUseProgram(baseshader);
 
-	glUniform4f(glGetUniformLocation(baseshader, "inColor"), color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f, 1.0f);
+	glUniform4f (glGetUniformLocation(baseshader, "inColor"),
+                 color[0] / 255.0f,
+                 color[1] / 255.0f,
+                 color[2] / 255.0f,
+                 1.0f);
 
 	glGetError();
 

@@ -56,6 +56,15 @@ def KeccakF1600(state):
     return state
 
 def Keccak(rate, capacity, inputBytes, delimitedSuffix, outputByteLen):
+    """
+    For SHA3_512, the parameter values are as follows:
+
+    rate            = 576
+    capacity        = 1024
+    inputBytes      = "hello"
+    delimitedSuffix = 0x06
+    outputByteLen   = 512//8
+    """
     outputBytes = bytearray()
     state = bytearray([0 for i in range(200)])
     rateInBytes = rate//8
