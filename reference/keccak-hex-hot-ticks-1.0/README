@@ -1,0 +1,76 @@
+==============================================================================
+       GPU (NVIDIA using CUDA) Implementation of Keccak-f1600
+==============================================================================
+
+The contents of this package are as follows:
+
+
+README                       : this file
+cuda_basic_test1.txt         : Test data; identical to message2 in source code
+cuda_basic_test2.txt         : Test data; identical to message3 in source code
+cuda_basic_test.txt          : Test data; identical to message1 in source code
+cuda_keccak_basic.cu         : Basic implementation. Call for example like
+                               ./keccak_basic cuda_basic_test.txt 100 
+cuda_keccak_basic.cuh        : Header for basic implementation
+cuda_keccak_batch.cu         : Batch implementation of Keccak-f1600. Hashes
+                               one file 960x.
+cuda_keccak_batch.cuh        : Header for batch implementation.
+cuda_keccak.cuh              : General header for test versions.
+cuda_keccak_test1.cu         : Test version 1.
+cuda_keccak_test1_output.txt : Output of test version 1.
+cuda_keccak_test2.cu         : Test version 2.
+cuda_keccak_test2_output.txt : Output of test version 2.
+experimental                 : directory containing an experimental version of
+                               a tree-based (LI-mode) implementation of
+                               Keccak-f1600.
+    /cuda_keccak_tree_li.cu  : Tree-based implementation of Keccak-f1600.
+    /cuda_keccak_tree_li.cuh : Header, main and makefile for tree-based
+    /main_tree_li.cpp          implementation.
+    /Makefile.tree_li
+main_basic.cpp               : main file for basic implementation.
+main_batch.cpp               : main file for basic implementation.
+main.cpp                     : main file for test versions.
+Makefile.basic               : Makefiles for the above implementations.
+Makefile.batch
+Makefile.test1
+Makefile.test2
+
+Comments:
+========
+
+The implementation was done on a GTX 295, which contains actually two GTX 285.
+Only one of them was used for the implementation. Starting with the test
+versions (basic, batch, experimental), one can follow the evolution of the 
+code. The most essential part is the Keccak permutation itself, which
+remains stable across the versions.
+
+The test, basic and batch versions have been tested against the reference
+implementation using the same input data as provided in the reference
+implementation of Keccak. 
+
+The experimental tree-based implementation could not be tested against an
+reference implementation. As with the other codes, we give it as is.
+
+The batch version hashes one file 960 times. Of course, in reality is
+should hash different files. This can be quite complicated depending
+on the variation of the file sizes and would require a sort of 
+scheduling algorithm for the best performance. Therefore, the batch
+version only shows how to proceed in principle.
+
+The implementation does not use any special features of the new Fermi
+architecture of NVIDIA. Therefore the kernel should be executable also
+on older models as the GTX 295. Using Fermi there might be substanial 
+improvements possible, though.
+
+In any case, this code is absolutely free and hopefully will help other 
+people as starting point for Keccak on the GPU.
+
+Gerhard Hoffmann
+hoffmann@mathematik.tu-darmstadt.de
+
+
+
+
+
+
+
